@@ -38,13 +38,15 @@ const login = async (req, res) => {
 }
 
 const joinGame = async (req,res) => {
+  console.log(`Check out this sweet body: ${req.body.gameId}`);
   const { userId, gameId } = req.body;
   try {
+    console.log("About to join game ID : ", gameId, "\n");
     await User.findByIdAndUpdate(userId, { $set : { currentGame : gameId }});
     await Game.findByIdAndUpdate(gameId, { $push : { players : userId }});
     const userInfoWithGame = await User.findById(userId).populate('currentGame');
     console.log("Gave the user access to the game: ", userInfoWithGame);
-    console.log("This should grab the events happening at French Hill Streets in the current game: ", userInfoWithGame.currentGame.game.board.map.FrenchHillStreets);
+    //console.log("This should grab the events happening at French Hill Streets in the current game: ", userInfoWithGame.currentGame.game.board.map.FrenchHillStreets);
     res.status(202).send({ message: "The User should now have access to their game." });
   } catch(e) {
     console.log("There was an error joining the game: ", e);
@@ -60,6 +62,7 @@ const claimInvestigator = async (req, res) => {
     };
     console.log("The copy of the game state is: ", newGameState);
     const investigatorToModify = newGameState.investigators.find(investigator => (investigator.job === jobToClaim));
+    console.log(`\nInvestigator to Modify: ${investigatorToModify.name}\nuserId: ${userId}\ngameId: ${gameId}\nJob to Claim: ${jobToClaim}\n\n`);
     investigatorToModify.playerId = userId;
     console.log("About to reassign game state: ", newGameState.investigators);
     const gameToUpdate = await Game.findByIdAndUpdate(gameId, { $set:

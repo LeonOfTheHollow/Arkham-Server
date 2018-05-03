@@ -19,10 +19,11 @@ module.exports = app => {
 
   app.route('/join-game')
     .post(UserControllers.joinGame);
+  
+  app.route('/games/all')
+    .get(GameControllers.getAllGames);
 
   app.route('/games/:id')
     .get(UserControllers.getCurrentGame);
   
-  app.route('/games/all')
-    .get(GameControllers.getAllGames);
 }

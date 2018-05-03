@@ -4,8 +4,9 @@ const initializeGameState = require('../resources/gameInitializer');
 
 const buildNewGame = async (req, res) => {
   const gameOptions = {
-    numberOfPlayers: 1,
+    numberOfPlayers: req.body.gameSize,
   }
+  //console.log(`\n${gameOptions.numberOfPlayers}\n`);
   const newGame = initializeGameState.initializeGameState(gameOptions);
   const game = new Game({game: newGame});
   try {
@@ -21,10 +22,10 @@ const makeMove = async (req, res) => {
     const currentGameState = await Game.findById(req.body.gameId);
     console.log(currentGameState);
     const newGameState = parse(currentGameState, req.body.move);
-    console.log("About to update state of game in database to: ", newGameState.game.board.map.FrenchHillStreets);
+    console.log("About to update state of game in database to: ", newGameState);
     const updatedGame = await Game.findOneAndUpdate(
       { "_id" : req.body.gameId },
-      { game : newGameState.game },
+      { game : newGameState },
       { returnNewDocument: true }
     ); //I can't quite figure out how to get this findOneAndUpdate to return the new document value, it seems to be a syntax thing. Worked around for now.
     console.log("About to respond with the new state of the game: ", updatedGame.game.board.map.FrenchHillStreets);
@@ -40,7 +41,7 @@ const getAllGames = async (req, res) => {
     const allGames = await Game.find({});
     res.status(200).send(allGames);
   } catch(e) {
-    console.log(e);
+    console.log("There was a problem retrieving the full set of games: ", e);
   }
 }
 

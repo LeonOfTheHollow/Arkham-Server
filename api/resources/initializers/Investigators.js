@@ -12,12 +12,15 @@ const populateInvestigators = options => {
 
   }
   */
+  console.log(`\n${options.numberOfPlayers}\n`);
   const investigators = [];
-  console.log("Number of players in game: ", options.numberOfPlayers);
-
+  console.log("Number of investigator slots: ", options.numberOfPlayers);
+  console.log("Number of investigators generated: ", investigators.length);
   while (investigators.length < options.numberOfPlayers) {
-    // 
-    const seed = 0;
+    console.log("We're executing a loop of character population.\n");
+    let seed = Math.floor(Math.random() * 6);
+    while (seed > 1) seed = Math.floor(Math.random() * 6);
+    console.log("This is the chargen seed: ", seed, "\n");
     switch (seed) {
       case 0:
         console.log("Amanda is investigating the strange happenings!", rollNewAmanda);
