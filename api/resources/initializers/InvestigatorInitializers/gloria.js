@@ -1,6 +1,6 @@
-const Decks = require('../../items');
+const Decks = require('../../items/Decks');
 
-export const rollNewGloria = () => {
+const rollNewGloria = () => {
   const GloriaGoldberg = {};
   GloriaGoldberg.name = "Gloria Goldberg";
   GloriaGoldberg.job = "Author";
@@ -34,4 +34,8 @@ export const rollNewGloria = () => {
   GloriaGoldberg.bag = Decks.addCardsToArray(GloriaGoldberg.innates, Decks.skills, 1);
   
   return GloriaGoldberg;
+}
+
+module.exports = {
+  rollNewGloria
 }

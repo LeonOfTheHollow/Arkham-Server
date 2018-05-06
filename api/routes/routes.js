@@ -26,4 +26,7 @@ module.exports = app => {
   app.route('/games/:id')
     .get(UserControllers.getCurrentGame);
   
+  app.route('/users/:id')
+    .get(UserControllers.getCurrentUser);
+  
 }

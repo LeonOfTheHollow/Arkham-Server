@@ -10,6 +10,9 @@ const rollNewAmanda = () => {
   AmandaSharpe.maxStamina = 5;
   AmandaSharpe.focus = 3;
   AmandaSharpe.home = "Bank of Arkham";
+  AmandaSharpe.texts = {
+    intro: "The nightmares of a city beneath the waves come on stronger every night. You must find out why...",
+  }
   AmandaSharpe.statBlock = {
     speedMin: 1,
     sneakMin: 1,
@@ -43,5 +46,5 @@ const rollNewAmanda = () => {
 }
 
 module.exports = {
-  rollNewAmanda,
+  rollNewAmanda
 }

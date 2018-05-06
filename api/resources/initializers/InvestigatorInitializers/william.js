@@ -1,9 +1,9 @@
-const Decks = require('../../items');
+const Decks = require('../../items/Decks');
 
-export const rollNewWilliam = () => {
+const rollNewWilliam = () => {
   const WilliamYorick = {};
   WilliamYorick.name = "William Yorick";
-  WilliamYorick.job = "Actor/Gravedigger";
+  WilliamYorick.job = "Gravedigger";
   WilliamYorick.sanity = 4;
   WilliamYorick.maxSanity = 4;
   WilliamYorick.stamina = 6;
@@ -34,4 +34,8 @@ export const rollNewWilliam = () => {
   WilliamYorick.bag = Decks.addCardsToArray(WilliamYorick.innates, Decks.skills, 1);
   
   return WilliamYorick;
+}
+
+module.exports = {
+  rollNewWilliam
 }

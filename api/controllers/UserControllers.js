@@ -64,15 +64,31 @@ const claimInvestigator = async (req, res) => {
     const investigatorToModify = newGameState.investigators.find(investigator => (investigator.job === jobToClaim));
     console.log(`\nInvestigator to Modify: ${investigatorToModify.name}\nuserId: ${userId}\ngameId: ${gameId}\nJob to Claim: ${jobToClaim}\n\n`);
     investigatorToModify.playerId = userId;
+    investigatorToModify.clientState = {
+      view_type: 'SETUP',
+      contextButtons: [
+        {
+          text: "Ready...",
+          type: 'BEGIN_GAME',
+          payload: userId,
+        }
+      ],
+      narration: `${newGameState.game ? newGameState.game.oldOne.name : 'Arkham'} welcomes you... we will begin when you are ready.`
+    }
     console.log("About to reassign game state: ", newGameState.investigators);
     const gameToUpdate = await Game.findByIdAndUpdate(gameId, { $set:
       {
         game : newGameState
       }
     });
-    const gameAfterUpdating = await Game.findById(gameId);
-    console.log(gameAfterUpdating.game.investigators);
-    res.status(200).send({ message: "The User's ID should now be attached to their chosen character." });
+
+    const userProfileToUpdate = await User.findByIdAndUpdate(userId, { $set:
+      {
+        currentJob : jobToClaim
+      }
+    });
+    console.log("\nUpdated user with job!\n");
+    res.status(200).send({ message: "The user should now be attached to their chosen character and vice versa." });
   } catch(e) {
     console.log("There was a problem claiming the investigator: ", e);
   }
@@ -87,6 +103,16 @@ const getCurrentGame = async (req, res) => {
   } catch(e) {
     console.log("There was an error fetching the current game: ", e);
   }
+};
+
+const getCurrentUser = async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const currentUser = await User.findById(userId).populate('currentGame');
+    res.status(200).send(currentUser);
+  } catch(e) {
+    console.log("There was an error fetching the current game: ", e);
+  }
 }
 
 module.exports = {
@@ -94,5 +120,6 @@ module.exports = {
   login,
   joinGame,
   getCurrentGame,
+  getCurrentUser,
   claimInvestigator
 }

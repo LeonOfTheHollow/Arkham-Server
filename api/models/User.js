@@ -22,6 +22,11 @@ const UserSchema = Schema({
   currentGame: {
     type: Schema.Types.ObjectId,
     ref: 'Game',
+  },
+  currentJob : {
+    type: String,
+    required: false,
+    default: 'None',
   }
 });
 

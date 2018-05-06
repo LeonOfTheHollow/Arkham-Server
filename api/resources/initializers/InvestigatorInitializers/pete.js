@@ -1,6 +1,6 @@
-const Decks = require('../../items');
+const Decks = require('../../items/Decks');
 
-export const rollNewPete = () => {
+const rollNewPete = () => {
   const TrashcanPete = {};
   TrashcanPete.name = "'Trashcan' Pete";
   TrashcanPete.job = "Drifter";
@@ -34,4 +34,8 @@ export const rollNewPete = () => {
   TrashcanPete.bag = Decks.addCardsToArray(TrashcanPete.innates, Decks.skills, 1);
   
   return TrashcanPete;
+}
+
+module.exports = {
+  rollNewPete
 }

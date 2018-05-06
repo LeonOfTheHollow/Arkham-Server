@@ -10,6 +10,9 @@ const rollNewDarrell = () => {
   DarrellSimmons.maxStamina = 6;
   DarrellSimmons.focus = 2;
   DarrellSimmons.home = "Newspaper";
+  DarrellSimmons.texts = {
+    intro: "Take some time off, they said! You need some rest, they said! You'll show them. Camera slung on your shoulder like a revolutionary's rifle, you set off into the night.",
+  }
   DarrellSimmons.statBlock = {
     speedMin: 2,
     sneakMin: 0,
