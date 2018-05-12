@@ -1,4 +1,5 @@
 const Decks = require('../../items/Decks');
+const Investigator = require('./InvestigatorPrototype').Investigator;
 
 const rollNewWilliam = () => {
   const WilliamYorick = {};
@@ -9,7 +10,7 @@ const rollNewWilliam = () => {
   WilliamYorick.stamina = 6;
   WilliamYorick.maxStamina = 6;
   WilliamYorick.focus = 1;
-  WilliamYorick.home = "South Church";
+  WilliamYorick.home = "Christchurch Cemetery";
   WilliamYorick.statBlock = {
     speedMin: 0,
     sneakMin: 1,
@@ -33,7 +34,7 @@ const rollNewWilliam = () => {
   WilliamYorick.bag = Decks.addCardsToArray(WilliamYorick.bag, Decks.artifacts, 2);
   WilliamYorick.bag = Decks.addCardsToArray(WilliamYorick.innates, Decks.skills, 1);
   
-  return WilliamYorick;
+  return new Investigator(WilliamYorick.name, WilliamYorick.job, WilliamYorick.home, WilliamYorick.maxSanity, WilliamYorick.maxStamina, WilliamYorick.focus, WilliamYorick.statBlock, WilliamYorick.wallet, WilliamYorick.clues, WilliamYorick.gateTrophies, 2,2,0,1,0, WilliamYorick.tags);
 }
 
 module.exports = {

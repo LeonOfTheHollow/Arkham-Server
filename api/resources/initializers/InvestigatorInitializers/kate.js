@@ -1,4 +1,5 @@
 const Decks = require('../../items/Decks');
+const Investigator = require('./InvestigatorPrototype').Investigator;
 
 const rollNewKate = () => {
   const KateWinthrop = {};
@@ -9,7 +10,7 @@ const rollNewKate = () => {
   KateWinthrop.stamina = 4;
   KateWinthrop.maxStamina = 4;
   KateWinthrop.focus = 1;
-  KateWinthrop.home = "Science Building";
+  KateWinthrop.home = "College of Physical Sciences";
   KateWinthrop.statBlock = {
     speedMin: 1,
     sneakMin: 2,
@@ -34,7 +35,7 @@ const rollNewKate = () => {
   KateWinthrop.bag = Decks.addCardsToArray(KateWinthrop.bag, Decks.spells, 2);
   KateWinthrop.bag = Decks.addCardsToArray(KateWinthrop.innates, Decks.skills, 1);
   
-  return KateWinthrop;
+  return new Investigator(KateWinthrop.name, KateWinthrop.job, KateWinthrop.home, KateWinthrop.maxSanity, KateWinthrop.maxStamina, KateWinthrop.focus, KateWinthrop.statBlock, KateWinthrop.wallet, KateWinthrop.clues, KateWinthrop.gateTrophies, 1,1,2,1,0, KateWinthrop.tags);
 }
 
 module.exports = {

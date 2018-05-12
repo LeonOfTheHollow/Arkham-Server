@@ -6,7 +6,6 @@ const buildNewGame = async (req, res) => {
   const gameOptions = {
     numberOfPlayers: req.body.gameSize,
   }
-  //console.log(`\n${gameOptions.numberOfPlayers}\n`);
   const newGame = initializeGameState.initializeGameState(gameOptions);
   const game = new Game({game: newGame});
   try {
@@ -20,16 +19,14 @@ const buildNewGame = async (req, res) => {
 const makeMove = async (req, res) => {
   try {
     const currentGameState = await Game.findById(req.body.gameId);
-    console.log(currentGameState);
     const newGameState = parse(currentGameState, req.body.move);
-    console.log("About to update state of game in database to: ", newGameState);
     const updatedGame = await Game.findOneAndUpdate(
       { "_id" : req.body.gameId },
       { game : newGameState },
       { returnNewDocument: true }
     ); //I can't quite figure out how to get this findOneAndUpdate to return the new document value, it seems to be a syntax thing. Worked around for now.
-    console.log("About to respond with the new state of the game: ", updatedGame.game.board.map.FrenchHillStreets);
     const supremeMostUpdatedGame = await Game.findById(req.body.gameId); //We should be able to factor out this request.
+    console.log("About to reply to the request with this updated state:", supremeMostUpdatedGame);
     res.status(200).send(supremeMostUpdatedGame);
   } catch(e) {
     console.log(e);

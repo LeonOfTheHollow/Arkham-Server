@@ -1,4 +1,5 @@
 const Decks = require('../../items/Decks');
+const Investigator = require('./InvestigatorPrototype').Investigator;
 
 const rollNewAmanda = () => {
   const AmandaSharpe = {};
@@ -9,7 +10,7 @@ const rollNewAmanda = () => {
   AmandaSharpe.stamina = 5;
   AmandaSharpe.maxStamina = 5;
   AmandaSharpe.focus = 3;
-  AmandaSharpe.home = "Bank of Arkham";
+  AmandaSharpe.home = "Lecture Hall";
   AmandaSharpe.texts = {
     intro: "The nightmares of a city beneath the waves come on stronger every night. You must find out why...",
   }
@@ -32,17 +33,9 @@ const rollNewAmanda = () => {
   AmandaSharpe.innates = [];
   AmandaSharpe.tags = [];
 
-  AmandaSharpe.bag = Decks.addCardsToArray(AmandaSharpe.bag, Decks.commonItems, 1);
-  console.log("Added an item to the bag: ", AmandaSharpe.bag);
-  AmandaSharpe.bag = Decks.addCardsToArray(AmandaSharpe.bag, Decks.artifacts, 1);
-  console.log("Added an artifact to the bag: ", AmandaSharpe.bag);
-  AmandaSharpe.bag = Decks.addCardsToArray(AmandaSharpe.bag, Decks.spells, 1);
-  console.log("Added a spell to the bag: ", AmandaSharpe.bag);
-  AmandaSharpe.innates = Decks.addCardsToArray(AmandaSharpe.innates, Decks.skills, 2);
-  console.log("Added two skills to Innates: ", AmandaSharpe.innates);
-  console.log("What's in the bag at this point?", AmandaSharpe.bag);
+  console.log("\nThis is the Investigator class prototype:\n", Investigator, "\n* * *\n");
   
-  return AmandaSharpe;
+  return new Investigator(AmandaSharpe.name, AmandaSharpe.job, AmandaSharpe.home, AmandaSharpe.maxSanity, AmandaSharpe.maxStamina, AmandaSharpe.focus, AmandaSharpe.statBlock, AmandaSharpe.wallet, AmandaSharpe.clues, AmandaSharpe.gateTrophies, 1, 1, 1, 2, 0);
 }
 
 module.exports = {

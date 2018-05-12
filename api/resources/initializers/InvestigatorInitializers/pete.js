@@ -1,4 +1,5 @@
 const Decks = require('../../items/Decks');
+const Investigator = require('./InvestigatorPrototype').Investigator;
 
 const rollNewPete = () => {
   const TrashcanPete = {};
@@ -9,7 +10,7 @@ const rollNewPete = () => {
   TrashcanPete.stamina = 6;
   TrashcanPete.maxStamina = 6;
   TrashcanPete.focus = 1;
-  TrashcanPete.home = "River Docks";
+  TrashcanPete.home = "Warehouse Alleys";
   TrashcanPete.statBlock = {
     speedMin: 0,
     sneakMin: 3,
@@ -33,7 +34,7 @@ const rollNewPete = () => {
   TrashcanPete.bag = Decks.addCardsToArray(TrashcanPete.bag, Decks.artifacts, 1);
   TrashcanPete.bag = Decks.addCardsToArray(TrashcanPete.innates, Decks.skills, 1);
   
-  return TrashcanPete;
+  return new Investigator(TrashcanPete.name, TrashcanPete.job, TrashcanPete.home, TrashcanPete.maxSanity, TrashcanPete.maxStamina, TrashcanPete.focus, TrashcanPete.statBlock, TrashcanPete.wallet, TrashcanPete.clues, TrashcanPete.gateTrophies, 1,1,0,1,0, TrashcanPete.tags);
 }
 
 module.exports = {

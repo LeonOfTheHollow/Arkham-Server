@@ -1,4 +1,5 @@
 const Decks = require('../../items/Decks');
+const Investigator = require('./InvestigatorPrototype').Investigator;
 
 const rollNewGloria = () => {
   const GloriaGoldberg = {};
@@ -29,11 +30,7 @@ const rollNewGloria = () => {
   GloriaGoldberg.innates = [];
   GloriaGoldberg.tags = [];
 
-  GloriaGoldberg.bag = Decks.addCardsToArray(GloriaGoldberg.bag, Decks.commonItems, 2);
-  GloriaGoldberg.bag = Decks.addCardsToArray(GloriaGoldberg.bag, Decks.spells, 2);
-  GloriaGoldberg.bag = Decks.addCardsToArray(GloriaGoldberg.innates, Decks.skills, 1);
-  
-  return GloriaGoldberg;
+  return new Investigator(GloriaGoldberg.name, GloriaGoldberg.job, GloriaGoldberg.home, GloriaGoldberg.maxSanity, GloriaGoldberg.maxStamina, GloriaGoldberg.focus, GloriaGoldberg.statBlock, GloriaGoldberg.wallet, GloriaGoldberg.clues, GloriaGoldberg.gateTrophies, 1,2,0,1,0, GloriaGoldberg.tags);
 }
 
 module.exports = {

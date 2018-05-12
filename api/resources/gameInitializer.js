@@ -14,7 +14,6 @@ const initializeGameState = (gameOptions) => {
     untradeablesDecks: initializeUntradeablesDecks.initializeUntradeablesDecks(),
     monsterCup: initializeMonsterCup.initializeMonsterCup(),
   };
-
   state.oldOne = initializeOldOne.initializeOldOne();
 
   return state;

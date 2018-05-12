@@ -2,7 +2,6 @@ const User = require('../models/User');
 const Game = require('../models/Game');
 
 const register = async (req, res) => {
-  console.log('About to make a new user');
   const { username, password, email } = req.body;
   const newUser = { username, password, email };
   const user = new User(newUser);
@@ -38,14 +37,13 @@ const login = async (req, res) => {
 }
 
 const joinGame = async (req,res) => {
-  console.log(`Check out this sweet body: ${req.body.gameId}`);
   const { userId, gameId } = req.body;
   try {
-    console.log("About to join game ID : ", gameId, "\n");
+    //console.log("About to join game ID : ", gameId, "\n");
     await User.findByIdAndUpdate(userId, { $set : { currentGame : gameId }});
     await Game.findByIdAndUpdate(gameId, { $push : { players : userId }});
     const userInfoWithGame = await User.findById(userId).populate('currentGame');
-    console.log("Gave the user access to the game: ", userInfoWithGame);
+    //console.log("Gave the user access to the game: ", userInfoWithGame);
     //console.log("This should grab the events happening at French Hill Streets in the current game: ", userInfoWithGame.currentGame.game.board.map.FrenchHillStreets);
     res.status(202).send({ message: "The User should now have access to their game." });
   } catch(e) {
