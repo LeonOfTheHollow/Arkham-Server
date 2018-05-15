@@ -42,9 +42,20 @@ const DarkStrangerDetermineChoices = (gameState, currentInvestigator) => {
 const DarkStrangerEffects = (gameState, currentInvestigator, playerChoice) => {
   console.log("Resolving effect of Dark Stranger!", playerChoice);
   switch(playerChoice) {
-    case 1:
+    case 1:  //Investigator took the deal.
       currentInvestigator.sanity--;
       currentInvestigator.stamina--;
+      currentInvestigator.clientState = {
+        view_type: "INVESTIGATION",
+        contextButtons: [
+          {
+            text: 'Move on',
+            type: 'GO_TO_END_PHASE',
+            payload: 0,
+          }
+        ],
+        narration: "With a wicked smile, the man hands over a parcel. As soon as you take it, you feel light-headed and begin to stumble, barely catching yourself against a nearby tree.\nWhen you regain your bearings, the dark man is nowhere to be seen."
+      }
   }
 }
 

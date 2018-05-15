@@ -1,14 +1,19 @@
 const { LichStEncounters } = require('./encounterScripts/LichStreetEncounters');
 const { investigate_location, process_encounter_choice } = require('./moveScripts/investigate_location');
-
+const { end_turn } = require('./moveScripts/turnEndPhase');
+const { change_slider } = require('./moveScripts/change_slider');
+const { take_path } = require('./moveScripts/take_path');
+const { spawn_monster_at_location } = require('./moveScripts/spawn_monster_at_location');
+const { go_to_battle, attack_monster, evade_monster, resolve_attack, resolve_run } = require('./moveScripts/battle');
 
 const parse = (gameState, move) => {
-  console.log("The parser received state: ", gameState);
   console.log("The parser received move: ", move);
   const playerId = move.player;
-  const newGameState = {
-    ...gameState._doc.game,
-  };
+  console.log("Found a Player ID to use for this : ", playerId);
+  // const newGameState = {
+  //   ...gameState._doc.game,
+  // };
+  const newGameState = gameState;
   const thisInvestigator = newGameState.investigators.find(investigator => {
     if (investigator.playerId._id === playerId) return investigator;
   });
@@ -55,6 +60,7 @@ const parse = (gameState, move) => {
       return newGameState;
     case 'GO_TO_MOVEMENT_PHASE':
       newGameState.investigators.forEach(investigator => {
+        investigator.finishedTurn = false;
         investigator.movePoints = investigator.minSpeed + investigator.topPointer + thisInvestigator.speedBuffs.reduce(((total, buff) => total + buff.value), 0);
         investigator.clientState = {
           view_type: 'MOVEMENT',
@@ -74,39 +80,28 @@ const parse = (gameState, move) => {
       });
       return newGameState;
     case 'TAKE_PATH':
-      thisInvestigator.location = newGameState.board.map.locations[move.payload].name;
-      console.log("New location: ", thisInvestigator.location);
-      thisInvestigator.movePoints--;
-      thisInvestigator.clientState = {
-        view_type: 'MOVEMENT',
-        contextButtons: newGameState.board.map.locations.find(location => {
-          if (location.name === thisInvestigator.location) return location;
-        }).paths.map(path => {
-          return {
-            text: path.description,
-            type: 'TAKE_PATH',
-            payload: path.destination,
-          }
-        }),
-        narration: newGameState.board.map.locations.find(location => location.name === thisInvestigator.location).description,
-      }
-      return newGameState;
+      return take_path(newGameState, move.payload, thisInvestigator);
     case 'CHANGE_SLIDER':
-      console.log("Changing slider with this data:", move.payload);
-      if (move.payload.targetSlider === 'top_slider') {
-        console.log("Touched the top slider!");
-        thisInvestigator.topPointer = move.payload.targetValue;
-      } else if (move.payload.targetSlider === 'mid_slider') {
-        thisInvestigator.midPointer = move.payload.targetValue;
-      } else if (move.payload.targetSlider === 'bottom_slider') {
-        thisInvestigator.bottomPointer = move.payload.targetValue;
-      }
-      return newGameState;
+      return change_slider(newGameState, move.payload, thisInvestigator);
     case 'INVESTIGATE_LOCATION':
-      //get a rand()
       return investigate_location(newGameState, move.payload, thisInvestigator);
     case 'PROCESS_ENCOUNTER_CHOICE':
       return process_encounter_choice(newGameState, move.payload, thisInvestigator);
+    case 'GO_TO_END_PHASE':
+      return end_turn(newGameState, move.payload, thisInvestigator);
+    case 'SPAWN_MONSTER_AT_LOCATION':
+      console.log("Spawning monster...");
+      return spawn_monster_at_location(newGameState, move.payload);
+    case 'GO_TO_BATTLE':
+      return go_to_battle(newGameState, move.payload, thisInvestigator);
+    case 'ATTACK_MONSTER':
+      return attack_monster(newGameState, move.payload, thisInvestigator);
+    case 'EVADE_MONSTER':
+      return evade_monster(newGameState, move.payload, thisInvestigator);
+    case 'RESOLVE_ATTACK':
+      return resolve_attack(newGameState, move.payload, thisInvestigator);
+    case 'RESOLVE_RUN':
+      return resolve_run(newGameState, move.payload, thisInvestigator);
   }
 }
 

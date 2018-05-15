@@ -19,7 +19,7 @@ const buildNewGame = async (req, res) => {
 const makeMove = async (req, res) => {
   try {
     const currentGameState = await Game.findById(req.body.gameId);
-    const newGameState = parse(currentGameState, req.body.move);
+    const newGameState = parse(currentGameState._doc.game, req.body.move);
     const updatedGame = await Game.findOneAndUpdate(
       { "_id" : req.body.gameId },
       { game : newGameState },

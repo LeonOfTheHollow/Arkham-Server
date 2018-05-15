@@ -109,12 +109,12 @@ const skills = [
   {
     name: "Fisticuffs",
     description:
-      "The scars of battles long lost will be the currency with which we purchase victory."
+      "The scars of battles long lost will be the currency by which we purchase victory."
   },
   {
     name: "Performance",
     description:
-      "As long as we can sing, and dance, we have something they do not."
+      "As long as we can sing and dance, we have something they don't."
   }
 ];
 

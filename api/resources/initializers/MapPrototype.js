@@ -11,12 +11,20 @@ class Location {
     this.description = description;
     this.paths = paths;
     this.investigators = [];
+    this.monsters = [];
+    this.wildMonsters = [];
   }
 
   addPath(destination, description) {
     const path = new Path(destination, description);
     this.paths.push(path);
     return this.paths.length-1;
+  }
+
+  addWildMonsterList(list) {
+    for (let i = 0; i < list.length; i++) {
+      this.wildMonsters.push(list[i].name);
+    }
   }
 
 }
@@ -226,6 +234,52 @@ const SilverTwilightLodgeToFrenchHill = CityOfArkham.locations[SilverTwilightLod
 const SilverTwilightLodgeToSilverTwilightSanctum = CityOfArkham.locations[SilverTwilightLodge].addPath(SilverTwilightSanctum, "Go to Silver Twilight Sanctum");
 
 const SilverTwilightSanctumToSilverTwilightLodge = CityOfArkham.locations[SilverTwilightSanctum].addPath(SilverTwilightLodge, "Go to Silver Twilight Lodge");
+
+const { allMonsters } = require('../monsterdex/allMonsters.js');
+
+CityOfArkham.locations[WestStreet].addWildMonsterList(allMonsters);
+CityOfArkham.locations[HangmansHill].addWildMonsterList(allMonsters);
+CityOfArkham.locations[HangmansBrook].addWildMonsterList(allMonsters);
+CityOfArkham.locations[DarkWoods].addWildMonsterList(allMonsters);
+CityOfArkham.locations[WoodedGraveyard].addWildMonsterList(allMonsters);
+CityOfArkham.locations[StMarysHospital].addWildMonsterList(allMonsters);
+CityOfArkham.locations[WestChurch].addWildMonsterList(allMonsters);
+CityOfArkham.locations[ChurchStreet].addWildMonsterList(allMonsters);
+CityOfArkham.locations[RiverStreet].addWildMonsterList(allMonsters);
+CityOfArkham.locations[OvergrownIsland].addWildMonsterList(allMonsters);
+CityOfArkham.locations[ByzantinePier].addWildMonsterList(allMonsters);
+CityOfArkham.locations[WarehouseAlleys].addWildMonsterList(allMonsters);
+CityOfArkham.locations[ResidentialStreets].addWildMonsterList(allMonsters);
+CityOfArkham.locations[PickmansHouse].addWildMonsterList(allMonsters);
+CityOfArkham.locations[TheWitchHouse].addWildMonsterList(allMonsters);
+CityOfArkham.locations[CaligarisCuriosities].addWildMonsterList(allMonsters);
+CityOfArkham.locations[MiskatonicUniversityCampus].addWildMonsterList(allMonsters);
+CityOfArkham.locations[LectureHall].addWildMonsterList(allMonsters);
+CityOfArkham.locations[ResearchLibrary].addWildMonsterList(allMonsters);
+CityOfArkham.locations[CollegeOfPhysicalSciences].addWildMonsterList(allMonsters);
+CityOfArkham.locations[MainStreet].addWildMonsterList(allMonsters);
+CityOfArkham.locations[ArkhamInvestigator].addWildMonsterList(allMonsters);
+CityOfArkham.locations[ArkhamGeneralSupply].addWildMonsterList(allMonsters);
+CityOfArkham.locations[IndependenceSquare].addWildMonsterList(allMonsters);
+CityOfArkham.locations[VelmasDiner].addWildMonsterList(allMonsters);
+CityOfArkham.locations[BaptistChurch].addWildMonsterList(allMonsters);
+CityOfArkham.locations[LichStreet].addWildMonsterList(allMonsters);
+CityOfArkham.locations[ArkhamAsylum].addWildMonsterList(allMonsters);
+CityOfArkham.locations[PoliceStation].addWildMonsterList(allMonsters);
+CityOfArkham.locations[JailCell].addWildMonsterList(allMonsters);
+CityOfArkham.locations[MasBoardingHouse].addWildMonsterList(allMonsters);
+CityOfArkham.locations[Oldtown].addWildMonsterList(allMonsters);
+CityOfArkham.locations[ArtisticSupply].addWildMonsterList(allMonsters);
+CityOfArkham.locations[HistoricalSociety].addWildMonsterList(allMonsters);
+CityOfArkham.locations[HibbsRoadhouse].addWildMonsterList(allMonsters);
+CityOfArkham.locations[FrenchHill].addWildMonsterList(allMonsters);
+CityOfArkham.locations[MarbleGardens].addWildMonsterList(allMonsters);
+CityOfArkham.locations[TheUnnameable].addWildMonsterList(allMonsters);
+CityOfArkham.locations[SilverTwilightLodge].addWildMonsterList(allMonsters);
+CityOfArkham.locations[SilverTwilightSanctum].addWildMonsterList(allMonsters);
+CityOfArkham.locations[CemeteryRoad].addWildMonsterList(allMonsters);
+CityOfArkham.locations[ChristchurchCemetery].addWildMonsterList(allMonsters);
+CityOfArkham.locations[BlackCave].addWildMonsterList(allMonsters);
 
 module.exports = {
   CityOfArkham
