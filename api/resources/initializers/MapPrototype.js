@@ -166,7 +166,7 @@ const MainStreetToChurchStreet = CityOfArkham.locations[MainStreet].addPath(Chur
 const MainStreetToIndependenceSquare = CityOfArkham.locations[MainStreet].addPath(IndependenceSquare, "Go to Independence Square");
 const MainStreetToArkhamGeneralSupply = CityOfArkham.locations[MainStreet].addPath(ArkhamGeneralSupply, "Go to Arkham General Supply");
 const MainStreetToArkhamInvestigator = CityOfArkham.locations[MainStreet].addPath(ArkhamInvestigator, "Go to Arkham Investigator");
-const MainStreetToWarehouseAlleys = CityOfArkham.locations[MainStreet].addPath(WarehouseAlleys, "Go to Warehoues Alleys");
+const MainStreetToWarehouseAlleys = CityOfArkham.locations[MainStreet].addPath(WarehouseAlleys, "Go to Warehouse Alleys");
 
 const ArkhamInvestigatorToMainStreet = CityOfArkham.locations[ArkhamInvestigator].addPath(MainStreet, "Go to Main Street");
 

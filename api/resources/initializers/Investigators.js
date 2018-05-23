@@ -1,10 +1,9 @@
-//const { rollNewAmanda, rollNewDarrell, rollNewGloria, rollNewKate, rollNewPete, rollNewWilliam } = require("./InvestigatorInitializers");
-const { rollNewAmanda } = require("./InvestigatorInitializers/amanda");
-const { rollNewDarrell } = require("./InvestigatorInitializers/darrell");
-const { rollNewGloria } = require("./InvestigatorInitializers/gloria");
-const { rollNewKate } = require("./InvestigatorInitializers/kate");
-const { rollNewPete } = require("./InvestigatorInitializers/pete");
-const { rollNewWilliam } = require("./InvestigatorInitializers/william");
+const { rollNewAlexandra } = require("./InvestigatorInitializers/alexandra");
+const { rollNewKim } = require("./InvestigatorInitializers/kim");
+const { rollNewTerry } = require("./InvestigatorInitializers/terry");
+const { rollNewCarlos } = require("./InvestigatorInitializers/carlos");
+const { rollNewMarie } = require("./InvestigatorInitializers/marie");
+const { rollNewRoss } = require("./InvestigatorInitializers/ross");
 
 const populateInvestigators = options => {
   /* options : {
@@ -26,22 +25,22 @@ const populateInvestigators = options => {
     console.log("This is the chargen seed: ", seed, "\n");
     switch (seed) {
       case 1:
-        investigators.push(rollNewAmanda());
+        investigators.push(rollNewAlexandra());
         break;
       case 2:
-        investigators.push(rollNewDarrell());
+        investigators.push(rollNewCarlos());
         break;
       case 3:
-        investigators.push(rollNewGloria());
+        investigators.push(rollNewMarie());
         break;
       case 4:
-        investigators.push(rollNewKate());
+        investigators.push(rollNewKim());
         break;
       case 5:
-        investigators.push(rollNewPete());
+        investigators.push(rollNewTerry());
         break;
       case 6:
-        investigators.push(rollNewWilliam());
+        investigators.push(rollNewRoss());
         break;
       default:
         return;

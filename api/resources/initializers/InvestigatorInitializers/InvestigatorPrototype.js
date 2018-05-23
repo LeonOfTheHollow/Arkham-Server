@@ -35,6 +35,9 @@ class Investigator {
     this.bag = [];
     this.innates = [];
     this.spells = [];
+    this.leftHand = 'None',
+    this.rightHand = 'None',
+    this.equippedTrinkets = [],
     this.bag = Decks.addCardsToArray(this.bag, Decks.commonItems, randomItems);
     this.bag = Decks.addCardsToArray(this.bag, Decks.artifacts, randomArtifacts);
     this.spells = Decks.addCardsToArray(this.spells, Decks.spells, randomSpells);
@@ -43,27 +46,27 @@ class Investigator {
   }
 
   speed() {
-    return this.speedMin+this.topPointer+this.speedBuffs.reduce(((total, buff) => total + buff.value), 0);
+    return this.speedMin+this.topPointer+this.speedBuffs.reduce(((total, buff) => total + buff.val), 0);
   }
 
   sneak() {
-    return this.sneakMin+4-this.topPointer+this.sneakBuffs.reduce(((total, buff) => total + buff.value), 0);
+    return this.sneakMin+4-this.topPointer+this.sneakBuffs.reduce(((total, buff) => total + buff.val), 0);
   }
 
   fight() {
-    return this.fightMin+this.medPointer+this.fightBuffs.reduce(((total, buff) => total + buff.value), 0);
+    return this.fightMin+this.medPointer+this.fightBuffs.reduce(((total, buff) => total + buff.val), 0);
   }
 
   will() {
-    return this.willMin+4-this.medPointer+this.willBuffs.reduce(((total, buff) => total + buff.value), 0);
+    return this.willMin+4-this.medPointer+this.willBuffs.reduce(((total, buff) => total + buff.val), 0);
   }
 
   lore() {
-    return this.loreMin+this.bottomPointer+this.loreBuffs.reduce(((total, buff) => total + buff.value), 0);
+    return this.loreMin+this.bottomPointer+this.loreBuffs.reduce(((total, buff) => total + buff.val), 0);
   }
 
   luck() {
-    return this.luckMin+4-this.bottomPointer+this.luckBuffs.reduce(((total, buff) => total + buff.value), 0);
+    return this.luckMin+4-this.bottomPointer+this.luckBuffs.reduce(((total, buff) => total + buff.val), 0);
   }
 
 }

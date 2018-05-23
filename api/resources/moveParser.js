@@ -5,15 +5,15 @@ const { change_slider } = require('./moveScripts/change_slider');
 const { take_path } = require('./moveScripts/take_path');
 const { spawn_monster_at_location } = require('./moveScripts/spawn_monster_at_location');
 const { go_to_battle, attack_monster, evade_monster, resolve_attack, resolve_run } = require('./moveScripts/battle');
+const { equip_item, unequip_item } = require('./moveScripts/inventory_management');
+const { calculate_buffs } = require('./moveScripts/calculate_buffs');
+const { use_item } = require('./moveScripts/use_item');
 
 const parse = (gameState, move) => {
   console.log("The parser received move: ", move);
   const playerId = move.player;
-  console.log("Found a Player ID to use for this : ", playerId);
-  // const newGameState = {
-  //   ...gameState._doc.game,
-  // };
   const newGameState = gameState;
+  
   const thisInvestigator = newGameState.investigators.find(investigator => {
     if (investigator.playerId._id === playerId) return investigator;
   });
@@ -62,6 +62,7 @@ const parse = (gameState, move) => {
       newGameState.investigators.forEach(investigator => {
         investigator.finishedTurn = false;
         investigator.movePoints = investigator.minSpeed + investigator.topPointer + thisInvestigator.speedBuffs.reduce(((total, buff) => total + buff.value), 0);
+        investigator.focusPoints = investigator.focusMax;
         investigator.clientState = {
           view_type: 'MOVEMENT',
           contextButtons: newGameState.board.map.locations.find(location => {
@@ -90,7 +91,6 @@ const parse = (gameState, move) => {
     case 'GO_TO_END_PHASE':
       return end_turn(newGameState, move.payload, thisInvestigator);
     case 'SPAWN_MONSTER_AT_LOCATION':
-      console.log("Spawning monster...");
       return spawn_monster_at_location(newGameState, move.payload);
     case 'GO_TO_BATTLE':
       return go_to_battle(newGameState, move.payload, thisInvestigator);
@@ -102,6 +102,16 @@ const parse = (gameState, move) => {
       return resolve_attack(newGameState, move.payload, thisInvestigator);
     case 'RESOLVE_RUN':
       return resolve_run(newGameState, move.payload, thisInvestigator);
+    case 'EQUIP_ITEM':
+      const temp_equipping = equip_item(newGameState, move.payload, thisInvestigator);
+      return calculate_buffs(temp_equipping, thisInvestigator);
+    case 'UNEQUIP_ITEM':
+      const temp_unequipping = unequip_item(newGameState, move.payload, thisInvestigator);
+      return calculate_buffs(temp_unequipping, thisInvestigator);
+    case 'CALCULATE_BUFFS':
+      return calculate_buffs(newGameState, thisInvestigator);
+    case 'USE_ITEM':
+      return use_item(newGameState, move.payload, thisInvestigator);
   }
 }
 

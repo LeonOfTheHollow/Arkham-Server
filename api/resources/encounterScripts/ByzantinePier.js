@@ -1,26 +1,13 @@
 const { makeTest } = require('../makeTest');
 const Decks = require('../items/Decks.js');
 
-const dummyEncounterChoices = (game, investigator) => {
+const LongWalk = (game, investigator) => {
+  investigator.location = "Wooded Graveyard";
   return {
-    narration: "The night is deep and strange...!",
+    narration: "The moon's shattered mirror image on the black surface of the Miskatonic arrests your vision. In the twilit shimmers, suddenly you see yourself, not reflected, but as if from above - and, your gaze transfixed, unable to so much as shift an eyeball, you observe yourself strolling silently off the end of the pier. The vision falls soundlessly for an endless moment, and just before it strikes the water, everything goes black.\n\nThe next thing you are aware of is the cool feeling of thick grass beneath your back.",
     contextButtons: [
       {
-        text: "Use the first option.",
-        type: 'PROCESS_ENCOUNTER_CHOICE', 
-        payload: 1,
-      },
-      {
-        text: "Use the second option.",
-        type: 'PROCESS_ENCOUNTER_CHOICE', 
-        payload: 2,
-      },
-      {
-        text: "Use the third option.",
-        type: 'PROCESS_ENCOUNTER_CHOICE', 
-        payload: 3,
-      },{
-        text: "Keep on walking.",
+        text: "What just happened?",
         type: 'GO_TO_END_PHASE', 
         payload: 0,
       },
@@ -140,8 +127,8 @@ const ByzantinePier = {
   encounters: [
     {
       index: 0,
-      name: 'Dummy Encounter',
-      init: dummyEncounterChoices,
+      name: 'A Long Walk',
+      init: LongWalk,
       resolve: dummyEncounterEffects,
     }
   ],

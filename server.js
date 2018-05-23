@@ -1,4 +1,9 @@
 const express = require('express');
+
+const server = express();
+const http = require("http").Server(server);
+const io = require("socket.io")(http);
+
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -6,7 +11,6 @@ const helmet = require('helmet');
 const port = process.env.PORT || 5050;
 const routes = require('./api/routes/routes');
 
-const server = express();
 const corsOptions = {
   "origin": "*",
   "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
@@ -32,6 +36,13 @@ routes(server);
 server.listen(port, () => {
   console.log(`Server up and running on ${port}`);
 });
+
+io.on('connection', (socket) => {
+  console.log("a user connected");
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+})
 
 module.exports = {
   server

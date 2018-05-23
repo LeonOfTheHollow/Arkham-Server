@@ -7,6 +7,7 @@ const allMonsters = [
     combatRating: -3,
     combatDamage: 3,
     toughness: 3,
+    trophy: 4,
     homeDimensions: ["Celeano", "Underworld"],
     narration: "It draws the eye irresistibly, projecting an inner fire like an explosion of shimmering rubies.",
     tags: ["Stalker", "Physical Resistance"]
@@ -19,6 +20,7 @@ const allMonsters = [
     combatRating: -3,
     combatDamage: 3,
     toughness: 3,
+    trophy: 3,
     homeDimensions: ["Yith", "Kadath"],
     narration: "The beast towers from the earth, a hateful monument of flesh thrashing about in place",
     tags: ["Stationary", "Special"]
@@ -31,6 +33,7 @@ const allMonsters = [
     combatRating: 1,
     combatDamage: 1,
     toughness: 1,
+    trophy: 1,
     homeDimensions: ["Earth"],
     narration: "The line between good and evil divides the heart of each man..",
     tags: ["Cultist"]
@@ -43,6 +46,7 @@ const allMonsters = [
     combatRating: 1,
     combatDamage: 1,
     toughness: 1,
+    trophy: 1,
     homeDimensions: ["Earth"],
     narration: "Frothing at the mouth, howling obscenities.",
     tags: []
@@ -55,6 +59,7 @@ const allMonsters = [
     combatRating: -2,
     combatDamage: 2,
     toughness: 1,
+    trophy: 2,
     homeDimensions: ["Celeano", "Underworld"],
     narration: "It feels like a warm sunbeam on your back - at first.",
     tags: ["Flying", "Ambush", "Physical Immunity"]
@@ -66,7 +71,8 @@ const allMonsters = [
     horrorDamage: 2,
     combatRating: 0,
     combatDamage: 1,
-    toughness: 1,
+    toughness: 2,
+    trophy: 4,
     homeDimensions: ["Carcosa", "Yuggoth"],
     narration: "As terrible as it is in form, it is fouler still in thought.",
     tags: ["Flying", "Special"]
@@ -79,6 +85,7 @@ const allMonsters = [
     combatRating: -3,
     combatDamage: 1,
     toughness: 2,
+    trophy: 2,
     homeDimensions: ["Carcosa", "Earth"],
     narration: "He has long since left behind the truths of being human.",
     tags: ["Stalker", "Physical Resistance", "Stationary"]
@@ -91,6 +98,7 @@ const allMonsters = [
     combatRating: -3,
     combatDamage: 3,
     toughness: 3,
+    trophy: 3,
     homeDimensions: ["R'lyeh"],
     narration: "Its terrible, elongated face ended in a multitude of tentacles of varying lengths...as I watched, it unfurled, spined, slimy black wings and leapt into the air.",
     tags: []
@@ -103,6 +111,7 @@ const allMonsters = [
     combatRating: -3,
     combatDamage: 2,
     toughness: 1,
+    trophy: 2,
     homeDimensions: ["Earth", "Underworld"],
     narration: "A trapped soul. Perhaps you can set it free.",
     tags: ["Stationary", "Physical Immunity", "Undead"]
@@ -115,6 +124,7 @@ const allMonsters = [
     combatRating: 0,
     combatDamage: 0,
     toughness: 1,
+    trophy: 1,
     homeDimensions: ["Earth", "Underworld"],
     narration: "The jawbones of dead demons speak terrible truths.",
     tags: ["Stationary", "Physical Immunity", "Undead"]

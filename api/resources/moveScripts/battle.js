@@ -72,6 +72,7 @@ const resolve_attack = (game, monster, investigator) => {
       if (monsterAtLocation.name === monster.name) return i;
     });
     locationOfBattle.monsters = locationOfBattle.monsters.filter((monsterAtLocation) => monsterAtLocation !== monster.name);
+    console.log("Defeated this monster: ", monster);
     investigator.trophy += monster.trophy;
     investigator.clientState = {
       view_type: "MOVEMENT",

@@ -97,7 +97,7 @@ const ScreechingInTheManorEffects = (game, investigator, choice) => {
     case 3: //Used Luck
       successes = makeTest(investigator, 'luck');
       if (successes) {
-        investigator.bag.push(Decks.getRandomCard(Decks.allies));
+        investigator.bag.push(Decks.drawRandomCardFrom(game.untradeablesDecks.allyDeck));
         investigator.clientState = {
           view_type: "INVESTIGATION",
           narration: "They loved your face so much they decided to come with you.",
@@ -123,8 +123,8 @@ const ScreechingInTheManorEffects = (game, investigator, choice) => {
         }
       }
       break;
-    case 4: //Successfully kicked down door
-      investigator.bag.push(Decks.getRandomCard(Decks.artifacts));
+    case 4: //Successfully kicked down door, chose to pick up relic.
+      investigator.bag.push(game.tradeablesDecks.artifactDeck.getRandomCard(Decks.artifacts));
       investigator.sanity--;
       investigator.clientState = {
         view_type: "INVESTIGATION",

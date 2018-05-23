@@ -2,24 +2,25 @@ const makeTest = (investigator, stat, difficulty = 0, tags = []) => {
   let value;
   switch(stat) {
     case 'speed':
-      value = investigator.minSpeed + investigator.topPointer + investigator.speedBuffs.reduce(((total, buff) => total + buff.value), 0);
+      value = investigator.minSpeed + investigator.topPointer + investigator.speedBuffs.reduce(((total, buff) => total + buff.val), 0);
       break;
     case 'sneak':
-      value = investigator.minSneak + 3 - investigator.topPointer + investigator.sneakBuffs.reduce(((total, buff) => total + buff.value), 0);
+      value = investigator.minSneak + 3 - investigator.topPointer + investigator.sneakBuffs.reduce(((total, buff) => total + buff.val), 0);
       break;
     case 'will':
-      value = investigator.minWill + investigator.midPointer + investigator.willBuffs.reduce(((total, buff) => total + buff.value), 0);
+      value = investigator.minWill + investigator.midPointer + investigator.willBuffs.reduce(((total, buff) => total + buff.val), 0);
       break;
     case 'fight':
-      value = investigator.minFight + 3 - investigator.midPointer + investigator.fightBuffs.reduce(((total, buff) => total + buff.value), 0);
+      value = investigator.minFight + 3 - investigator.midPointer + investigator.fightBuffs.reduce(((total, buff) => total + buff.val), 0);
       break;
     case 'lore':
-      value = investigator.minLore + investigator.bottomPointer + investigator.loreBuffs.reduce(((total, buff) => total + buff.value), 0);
+      value = investigator.minLore + investigator.bottomPointer + investigator.loreBuffs.reduce(((total, buff) => total + buff.val), 0);
       break;
     case 'luck':
-      value = investigator.minLuck + investigator.bottomPointer + investigator.luckBuffs.reduce(((total, buff) => total + buff.value), 0);
+      value = investigator.minLuck + 3 - investigator.bottomPointer + investigator.luckBuffs.reduce(((total, buff) => total + buff.val), 0);
       break;
     default:
+      console.log("Making default roll. This should be null - otherwise, it is malformed: ", stat);
       value = 1;
       break;
   }
@@ -32,6 +33,7 @@ const makeTest = (investigator, stat, difficulty = 0, tags = []) => {
   for (let i = 0; i < value + difficulty; i++) {
     if (Math.random() > bar) successes++;
   }
+  console.log(`Rolled ${successes} succeses with score of ${value}`);
   return successes;
 }
 
