@@ -37,6 +37,17 @@ const makeTest = (investigator, stat, difficulty = 0, tags = []) => {
   return successes;
 }
 
+const spliceOutByName = (arr, target) => {
+  console.log("About to remove ", target, " from a bag.");
+  let indexToPull;
+  arr.forEach((el, i) => {
+    if (el.name === target) indexToPull = i;
+  })
+  console.log("About to pull ", target, " from ", indexToPull);
+  if (indexToPull) arr.splice(indexToPull, 1);
+}
+
 module.exports = {
-  makeTest
+  makeTest,
+  spliceOutByName
 }

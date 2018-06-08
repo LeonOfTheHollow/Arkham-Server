@@ -3,7 +3,7 @@ const initializeOldOne = () => {
     name: "Cthulhu",
     difficulty: -6,
     doom: 0,
-    doomMax: 3,
+    doomMax: 13,
   }
 }
 

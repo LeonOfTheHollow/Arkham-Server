@@ -8,6 +8,7 @@ const { go_to_battle, attack_monster, evade_monster, resolve_attack, resolve_run
 const { equip_item, unequip_item } = require('./moveScripts/inventory_management');
 const { calculate_buffs } = require('./moveScripts/calculate_buffs');
 const { use_item } = require('./moveScripts/use_item');
+const { start_final_battle, attack_boss, boss_attack } = require('./moveScripts/finalBattle');
 
 const parse = (gameState, move) => {
   console.log("The parser received move: ", move);
@@ -112,6 +113,13 @@ const parse = (gameState, move) => {
       return calculate_buffs(newGameState, thisInvestigator);
     case 'USE_ITEM':
       return use_item(newGameState, move.payload, thisInvestigator);
+    case 'GO_TO_FINAL_BATTLE':
+      const { investigators } = newGameState;
+      return start_final_battle(game, investigators);
+    case 'BOSS_ATTACK':
+      return boss_attack(newGameState, newGameState.oldOne, thisInvestigator);
+    case 'ATTACK_BOSS':
+      return attack_boss(newGameState, newGameState.oldOne, thisInvestigator);
   }
 }
 

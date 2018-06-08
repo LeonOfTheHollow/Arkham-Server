@@ -1,5 +1,7 @@
 const express = require('express');
 
+require('dotenv').config();
+
 const server = express();
 const http = require("http").Server(server);
 const io = require("socket.io")(http);
@@ -10,6 +12,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const port = process.env.PORT || 5050;
 const routes = require('./api/routes/routes');
+
 
 const corsOptions = {
   "origin": "*",
@@ -23,7 +26,8 @@ server.use(bodyParser.json());
 server.use(cors(corsOptions));
 
 mongoose
-  .connect("mongodb://localhost/games")
+  // .connect("mongodb://localhost/games")
+  .connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_SERVER}`)
   .then(conn => {
     console.log("Successfully Connected to Games database!");
   })
