@@ -4,7 +4,6 @@ require('dotenv').config();
 
 const server = express();
 const http = require("http").Server(server);
-const io = require("socket.io")(http);
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -40,13 +39,6 @@ routes(server);
 server.listen(port, () => {
   console.log(`Server up and running on ${port}`);
 });
-
-io.on('connection', (socket) => {
-  console.log("a user connected");
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-})
 
 module.exports = {
   server
